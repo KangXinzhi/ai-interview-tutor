@@ -1,14 +1,13 @@
-import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <button className="btn">Button</button>
-      <button className="btn btn-primary">Button</button>
-      <button className="btn btn-secondary">Button</button>
-      <button className="btn btn-accent">Button</button>
-      <button className="btn btn-ghost">Button</button>
-      <button className="btn btn-link">Button</button>
-    </main>
+      <div className="flex flex-col items-center justify-center h-screen">
+        <h1 className="text-4xl font-bold mb-6">欢迎使用AI面试导师</h1>
+        <p className="text-lg text-gray-600 mb-12">通过语音交互提供专业的面试辅导</p>
+        <Link href="/ai" className="btn btn-active btn-primary text-lg">
+          立即体验
+        </Link>
+      </div>
   )
 }
