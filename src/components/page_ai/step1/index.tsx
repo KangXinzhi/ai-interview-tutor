@@ -44,7 +44,7 @@ export default function Step1() {
       <div className="overflow-y-scroll">
         <div className="grid grid-cols-1 gap-4">
           {mockData.map(item => (
-            <div key={item.id} className="bg-white rounded-md shadow-md p-4" onClick={() => { handleChooseTheme(item.description) }}>
+            <div key={item.id} className="bg-white rounded-md shadow-md p-4 cursor-pointer" onClick={() => { handleChooseTheme(item.description) }}>
               <h2 className="text-xl font-bold mb-2">{item.title}</h2>
               <p className="text-gray-600">{item.description}</p>
             </div>
