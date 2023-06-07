@@ -22,39 +22,6 @@ const chat = new ChatOpenAI({
   timeout: 180000,
 })
 
-// async function check(answer) {
-//   const response = await chat.call([
-//     new HumanChatMessage(
-//       `
-//       帮我检查下英文作文，看看有无语法错误。例如：句子结构错误、缺少空格、缺少句号、单词拼写错误、单词单复数错误、大小写错误等方面问题。返回一个json。格式如下：
-//       {
-//         "questionEssay": "xxx(1)x,xxx(2)xxxx",
-//         "questionList": [{"order":"1", "question": "xxxx", "suggest": "xxxxx"},{"order":"2", "question": "xxxxx", "suggest": "xxxxx"}]
-//         "revisedEssay":"xxxxx"
-//        }
-//       这有一个例子，你可以学习下：
-//       作文: It is sad that taking risks brings a lot of benefit, However, it also has some drawbacks.
-//       返回: {
-//         "questionEssay": "It is sad(1) that taking risks brings a lot of benefit(2),(3) However, it also has some drawbacks.",
-//         "questionList": [
-//           {"order":"1", "question": "单词拼写错误", "suggest": "sad改成said"},
-//           {"order":"2", "question": "单词单复数错误", "suggest": "benefit改成benefits"},
-//           {"order":"3","question": "标点错误", "suggest": "逗号改成句号"}
-//         ],
-//          "revisedEssay":  "It is said that taking risks brings a lot of benefits. However, it also gives us some drawbacks."
-//         }
-//       要求: questionEssay中的问题序号，一定要和questionList中的order对应。并且序号一定要紧跟在错误单词后面。
-//       下面我提供我的英文作文：
-//       ----
-//       ${answer}
-//       ----
-//       请根据上面的例子和要求给我返回一个JSON。
-//     `),
-//   ])
-
-//   return response
-// }
-
 async function check(answer) {
   const response = await chat.call([
     new HumanChatMessage(

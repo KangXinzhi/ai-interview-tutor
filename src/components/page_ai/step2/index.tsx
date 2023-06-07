@@ -9,17 +9,18 @@ function Step2() {
   const handlePressStart = async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      const recorder = new MediaRecorder(mediaStream)
+      const recorder = new MediaRecorder(mediaStream, { mimeType: 'audio/webm' })
       const chunks: BlobPart[] = []
 
       recorder.addEventListener('dataavailable', (event) => {
         chunks.push(event.data)
       })
 
-      recorder.addEventListener('stop', () => {
-        const audioBlob = new Blob(chunks, { type: 'audio/webm' })
+      recorder.addEventListener('stop', async () => {
+        const audioBlob = new Blob(chunks, { type: 'audio/wav' })
         const audioUrl = URL.createObjectURL(audioBlob)
-
+        // const file = new File([audioBlob], 'name.wav')
+        // console.log('file', file)
         // 添加录制的音频消息到消息列表
         setMessages(prevMessages => [
           ...prevMessages,
@@ -65,6 +66,7 @@ function Step2() {
             <div className="chat-bubble bg-green-400" onClick={() => { handlePlayAudio(message.content as string) }}>
               <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4998" width="1.5rem" height="1.5rem"><path d="M297.505158 370.251921c-1.220914-1.220914-2.55998-2.252783-3.796648-3.434312L150.388997 510.144999l147.116161 147.116161c79.25699-79.25699 79.25699-207.752248 0-287.009239zM472.899255 194.865701c-1.213037-1.213037-2.489089-2.331551-3.710003-3.528834l-63.778955 63.778955c1.228791 1.189406 2.496965 2.315798 3.710002 3.528835 140.672887 140.672887 140.672887 369.566634 0 510.231644l63.778956 63.778955c175.835201-175.835201 175.835201-461.954354 0-637.789555z" fill="" p-id="4999"></path><path d="M664.236121 3.528834c-1.213037-1.213037-2.489089-2.323674-3.710002-3.528834l-63.778956 63.778956c1.220914 1.197283 2.496965 2.315798 3.710003 3.528834 246.175583 246.175583 246.175583 646.729794 0 892.905378l63.778955 63.778955c281.345774-281.345774 281.345774-739.117514 0-1020.463289z" fill="" p-id="5000"></path></svg>
             </div>
+            <audio controls src={message.content}/>
           </div>
         ))}
       </div>
